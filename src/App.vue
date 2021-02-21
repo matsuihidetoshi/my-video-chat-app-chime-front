@@ -39,7 +39,7 @@
     </v-app-bar>
 
     <v-main>
-      <Description/>
+      <router-view />
     </v-main>
 
     <v-footer

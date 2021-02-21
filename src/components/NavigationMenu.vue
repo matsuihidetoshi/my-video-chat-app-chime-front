@@ -25,9 +25,19 @@ import { Component, Vue } from 'vue-property-decorator'
     return {
       items: [
         {
+          name: 'Home',
+          to: '/',
+          icon: 'mdi-home'
+        },
+        {
           name: 'Meetings',
           to: '/meetings',
           icon: 'mdi-apps'
+        },
+        {
+          name: 'SignIn',
+          to: '/signin',
+          icon: 'mdi-account'
         }
       ]
     }

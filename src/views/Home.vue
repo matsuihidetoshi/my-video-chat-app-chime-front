@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <Description />
+    <Description
+      class="mt-12"
+    />
   </div>
 </template>
 
@@ -14,5 +15,6 @@ import Description from '../components/Description.vue'; // @ is an alias to /sr
     Description,
   },
 })
+
 export default class Home extends Vue {}
 </script>
