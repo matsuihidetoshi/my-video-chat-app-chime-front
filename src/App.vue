@@ -1,61 +1,76 @@
 <template>
   <v-app>
-    <v-app-bar
+    <v-navigation-drawer
+      v-model="drawer"
+      clipped
+      fixed
       app
-      color="primary"
-      dark
     >
-      <div class="d-flex align-center">
+      <navigation-menu />
+    </v-navigation-drawer>
+
+    <v-app-bar
+      color="white"
+      collapse-on-scroll
+      elevate-on-scroll
+      fixed
+      app
+    >
+      <v-app-bar-nav-icon
+        class="ml-1"
+        @click.stop="drawer = !drawer"
+      >
         <v-img
-          alt="Vuetify Logo"
+          alt="Shrimphouse Logo"
           class="shrink mr-2"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          src="/img/icons/android-chrome-512x512.png"
           transition="scale-transition"
           width="40"
         />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      </v-app-bar-nav-icon>
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-toolbar-title
+        class="font-weight-bold"
+        v-text="title"
+      />
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <Description/>
     </v-main>
+
+    <v-footer
+      absolute
+      app
+    >
+      <span>&copy; {{ new Date().getFullYear() }} &nbsp; Shrimphouse</span>
+    </v-footer>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { Component, Vue } from 'vue-property-decorator'
+import NavigationMenu from './components/NavigationMenu.vue'
+import Description from './components/Description.vue'
 
-export default Vue.extend({
+@Component({
   name: 'App',
 
   components: {
-    HelloWorld,
+    NavigationMenu,
+    Description
   },
 
-  data: () => ({
-    //
-  }),
-});
+  data () {
+    return {
+      title: 'Shrimphouse',
+      drawer: false
+    }
+  }
+})
+
+export default class App extends Vue { }
 </script>
