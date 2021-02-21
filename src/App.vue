@@ -30,7 +30,7 @@
         />
       </v-app-bar-nav-icon>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
 
       <v-toolbar-title
         class="font-weight-bold"

@@ -22,7 +22,7 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class NavigationMenu extends Vue {
-  items: object = [
+  items: Array<object> = [
     {
       name: 'Home',
       to: '/',
