@@ -8,40 +8,37 @@
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
 import { AmplifyEventBus } from 'aws-amplify-vue'
 import { Auth } from 'aws-amplify'
 import { Component, Vue } from 'vue-property-decorator'
 
-@Component({
-  name: 'SignIn',
-  data () {
-    return {
-      signedIn: false,
-      authConfig: {
-        signUpConfig: {
-          hideAllDefaults: true,
-          defaultCountryCode: '1',
-          signUpFields: [
-            {
-              label: 'Username',
-              key: 'username',
-              required: true,
-              displayOrder: 1,
-              type: 'string',
-            },
-            {
-              label: 'Password',
-              key: 'password',
-              required: true,
-              displayOrder: 2,
-              type: 'password'
-            }
-          ]
+@Component
+export default class SignIn extends Vue {
+  signedIn = false
+  authConfig: any = {
+    signUpConfig: {
+      hideAllDefaults: true,
+      defaultCountryCode: '1',
+      signUpFields: [
+        {
+          label: 'Email',
+          key: 'username',
+          required: true,
+          displayOrder: 1,
+          type: 'string',
+        },
+        {
+          label: 'Password',
+          key: 'password',
+          required: true,
+          displayOrder: 2,
+          type: 'password'
         }
-      }
+      ]
     }
-  },
+  }
+
   async beforeCreate() {
     try {
       await Auth.currentAuthenticatedUser()
@@ -57,9 +54,7 @@ import { Component, Vue } from 'vue-property-decorator'
       }
     })
   }
-})
-
-export default class SignIn extends Vue { }
+}
 </script>
 <style>
 .signin {

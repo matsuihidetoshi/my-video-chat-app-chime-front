@@ -57,20 +57,14 @@ import NavigationMenu from './components/NavigationMenu.vue'
 import Description from './components/Description.vue'
 
 @Component({
-  name: 'App',
-
   components: {
     NavigationMenu,
     Description
-  },
-
-  data () {
-    return {
-      title: 'Shrimphouse',
-      drawer: false
-    }
   }
 })
 
-export default class App extends Vue { }
+export default class App extends Vue {
+  title = 'Shrimphouse'
+  drawer = false
+}
 </script>

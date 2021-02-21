@@ -20,29 +20,24 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
-@Component({
-  data () {
-    return {
-      items: [
-        {
-          name: 'Home',
-          to: '/',
-          icon: 'mdi-home'
-        },
-        {
-          name: 'Meetings',
-          to: '/meetings',
-          icon: 'mdi-apps'
-        },
-        {
-          name: 'SignIn',
-          to: '/signin',
-          icon: 'mdi-account'
-        }
-      ]
+@Component
+export default class NavigationMenu extends Vue {
+  items: object = [
+    {
+      name: 'Home',
+      to: '/',
+      icon: 'mdi-home'
+    },
+    {
+      name: 'Meetings',
+      to: '/meetings',
+      icon: 'mdi-apps'
+    },
+    {
+      name: 'SignIn',
+      to: '/signin',
+      icon: 'mdi-account'
     }
-  }
-})
-
-export default class NavigationMenu extends Vue { }
+  ]
+}
 </script>

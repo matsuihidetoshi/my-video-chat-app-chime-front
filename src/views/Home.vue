@@ -7,14 +7,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import Description from '../components/Description.vue'; // @ is an alias to /src
+import { Component, Vue } from 'vue-property-decorator'
+import Description from '../components/Description.vue'
 
 @Component({
   components: {
-    Description,
-  },
+    Description
+  }
 })
 
-export default class Home extends Vue {}
+export default class Home extends Vue {
+}
 </script>
