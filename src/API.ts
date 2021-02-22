@@ -2,7 +2,7 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTaskInput = {
+export type CreateMeetingInput = {
   id?: string | null,
   meetingId: string,
   title: string,
@@ -10,14 +10,14 @@ export type CreateTaskInput = {
   updatedAt?: string | null,
 };
 
-export type ModelTaskConditionInput = {
+export type ModelMeetingConditionInput = {
   meetingId?: ModelStringInput | null,
   title?: ModelStringInput | null,
   description?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  and?: Array< ModelTaskConditionInput | null > | null,
-  or?: Array< ModelTaskConditionInput | null > | null,
-  not?: ModelTaskConditionInput | null,
+  and?: Array< ModelMeetingConditionInput | null > | null,
+  or?: Array< ModelMeetingConditionInput | null > | null,
+  not?: ModelMeetingConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -60,8 +60,8 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Task = {
-  __typename: "Task",
+export type Meeting = {
+  __typename: "Meeting",
   id?: string,
   meetingId?: string,
   title?: string,
@@ -71,7 +71,7 @@ export type Task = {
   owner?: string | null,
 };
 
-export type UpdateTaskInput = {
+export type UpdateMeetingInput = {
   id: string,
   meetingId?: string | null,
   title?: string | null,
@@ -79,19 +79,19 @@ export type UpdateTaskInput = {
   updatedAt?: string | null,
 };
 
-export type DeleteTaskInput = {
+export type DeleteMeetingInput = {
   id?: string | null,
 };
 
-export type ModelTaskFilterInput = {
+export type ModelMeetingFilterInput = {
   id?: ModelIDInput | null,
   meetingId?: ModelStringInput | null,
   title?: ModelStringInput | null,
   description?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  and?: Array< ModelTaskFilterInput | null > | null,
-  or?: Array< ModelTaskFilterInput | null > | null,
-  not?: ModelTaskFilterInput | null,
+  and?: Array< ModelMeetingFilterInput | null > | null,
+  or?: Array< ModelMeetingFilterInput | null > | null,
+  not?: ModelMeetingFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -110,20 +110,20 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelTaskConnection = {
-  __typename: "ModelTaskConnection",
-  items?:  Array<Task | null > | null,
+export type ModelMeetingConnection = {
+  __typename: "ModelMeetingConnection",
+  items?:  Array<Meeting | null > | null,
   nextToken?: string | null,
 };
 
-export type CreateTaskMutationVariables = {
-  input?: CreateTaskInput,
-  condition?: ModelTaskConditionInput | null,
+export type CreateMeetingMutationVariables = {
+  input?: CreateMeetingInput,
+  condition?: ModelMeetingConditionInput | null,
 };
 
-export type CreateTaskMutation = {
-  createTask?:  {
-    __typename: "Task",
+export type CreateMeetingMutation = {
+  createMeeting?:  {
+    __typename: "Meeting",
     id: string,
     meetingId: string,
     title: string,
@@ -134,14 +134,14 @@ export type CreateTaskMutation = {
   } | null,
 };
 
-export type UpdateTaskMutationVariables = {
-  input?: UpdateTaskInput,
-  condition?: ModelTaskConditionInput | null,
+export type UpdateMeetingMutationVariables = {
+  input?: UpdateMeetingInput,
+  condition?: ModelMeetingConditionInput | null,
 };
 
-export type UpdateTaskMutation = {
-  updateTask?:  {
-    __typename: "Task",
+export type UpdateMeetingMutation = {
+  updateMeeting?:  {
+    __typename: "Meeting",
     id: string,
     meetingId: string,
     title: string,
@@ -152,14 +152,14 @@ export type UpdateTaskMutation = {
   } | null,
 };
 
-export type DeleteTaskMutationVariables = {
-  input?: DeleteTaskInput,
-  condition?: ModelTaskConditionInput | null,
+export type DeleteMeetingMutationVariables = {
+  input?: DeleteMeetingInput,
+  condition?: ModelMeetingConditionInput | null,
 };
 
-export type DeleteTaskMutation = {
-  deleteTask?:  {
-    __typename: "Task",
+export type DeleteMeetingMutation = {
+  deleteMeeting?:  {
+    __typename: "Meeting",
     id: string,
     meetingId: string,
     title: string,
@@ -170,13 +170,13 @@ export type DeleteTaskMutation = {
   } | null,
 };
 
-export type GetTaskQueryVariables = {
+export type GetMeetingQueryVariables = {
   id?: string,
 };
 
-export type GetTaskQuery = {
-  getTask?:  {
-    __typename: "Task",
+export type GetMeetingQuery = {
+  getMeeting?:  {
+    __typename: "Meeting",
     id: string,
     meetingId: string,
     title: string,
@@ -187,17 +187,17 @@ export type GetTaskQuery = {
   } | null,
 };
 
-export type ListTasksQueryVariables = {
-  filter?: ModelTaskFilterInput | null,
+export type ListMeetingsQueryVariables = {
+  filter?: ModelMeetingFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTasksQuery = {
-  listTasks?:  {
-    __typename: "ModelTaskConnection",
+export type ListMeetingsQuery = {
+  listMeetings?:  {
+    __typename: "ModelMeetingConnection",
     items?:  Array< {
-      __typename: "Task",
+      __typename: "Meeting",
       id: string,
       meetingId: string,
       title: string,
@@ -210,13 +210,13 @@ export type ListTasksQuery = {
   } | null,
 };
 
-export type OnCreateTaskSubscriptionVariables = {
+export type OnCreateMeetingSubscriptionVariables = {
   owner?: string,
 };
 
-export type OnCreateTaskSubscription = {
-  onCreateTask?:  {
-    __typename: "Task",
+export type OnCreateMeetingSubscription = {
+  onCreateMeeting?:  {
+    __typename: "Meeting",
     id: string,
     meetingId: string,
     title: string,
@@ -227,13 +227,13 @@ export type OnCreateTaskSubscription = {
   } | null,
 };
 
-export type OnUpdateTaskSubscriptionVariables = {
+export type OnUpdateMeetingSubscriptionVariables = {
   owner?: string,
 };
 
-export type OnUpdateTaskSubscription = {
-  onUpdateTask?:  {
-    __typename: "Task",
+export type OnUpdateMeetingSubscription = {
+  onUpdateMeeting?:  {
+    __typename: "Meeting",
     id: string,
     meetingId: string,
     title: string,
@@ -244,13 +244,13 @@ export type OnUpdateTaskSubscription = {
   } | null,
 };
 
-export type OnDeleteTaskSubscriptionVariables = {
+export type OnDeleteMeetingSubscriptionVariables = {
   owner?: string,
 };
 
-export type OnDeleteTaskSubscription = {
-  onDeleteTask?:  {
-    __typename: "Task",
+export type OnDeleteMeetingSubscription = {
+  onDeleteMeeting?:  {
+    __typename: "Meeting",
     id: string,
     meetingId: string,
     title: string,

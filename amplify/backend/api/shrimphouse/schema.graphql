@@ -1,4 +1,4 @@
-type Task
+type Meeting
   @model
   @auth(
     rules: [

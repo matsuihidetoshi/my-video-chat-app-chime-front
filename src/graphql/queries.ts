@@ -2,9 +2,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getTask = /* GraphQL */ `
-  query GetTask($id: ID!) {
-    getTask(id: $id) {
+export const getMeeting = /* GraphQL */ `
+  query GetMeeting($id: ID!) {
+    getMeeting(id: $id) {
       id
       meetingId
       title
@@ -15,13 +15,13 @@ export const getTask = /* GraphQL */ `
     }
   }
 `;
-export const listTasks = /* GraphQL */ `
-  query ListTasks(
-    $filter: ModelTaskFilterInput
+export const listMeetings = /* GraphQL */ `
+  query ListMeetings(
+    $filter: ModelMeetingFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listMeetings(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         meetingId

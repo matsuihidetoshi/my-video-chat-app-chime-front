@@ -2,12 +2,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTask = /* GraphQL */ `
-  mutation CreateTask(
-    $input: CreateTaskInput!
-    $condition: ModelTaskConditionInput
+export const createMeeting = /* GraphQL */ `
+  mutation CreateMeeting(
+    $input: CreateMeetingInput!
+    $condition: ModelMeetingConditionInput
   ) {
-    createTask(input: $input, condition: $condition) {
+    createMeeting(input: $input, condition: $condition) {
       id
       meetingId
       title
@@ -18,12 +18,12 @@ export const createTask = /* GraphQL */ `
     }
   }
 `;
-export const updateTask = /* GraphQL */ `
-  mutation UpdateTask(
-    $input: UpdateTaskInput!
-    $condition: ModelTaskConditionInput
+export const updateMeeting = /* GraphQL */ `
+  mutation UpdateMeeting(
+    $input: UpdateMeetingInput!
+    $condition: ModelMeetingConditionInput
   ) {
-    updateTask(input: $input, condition: $condition) {
+    updateMeeting(input: $input, condition: $condition) {
       id
       meetingId
       title
@@ -34,12 +34,12 @@ export const updateTask = /* GraphQL */ `
     }
   }
 `;
-export const deleteTask = /* GraphQL */ `
-  mutation DeleteTask(
-    $input: DeleteTaskInput!
-    $condition: ModelTaskConditionInput
+export const deleteMeeting = /* GraphQL */ `
+  mutation DeleteMeeting(
+    $input: DeleteMeetingInput!
+    $condition: ModelMeetingConditionInput
   ) {
-    deleteTask(input: $input, condition: $condition) {
+    deleteMeeting(input: $input, condition: $condition) {
       id
       meetingId
       title

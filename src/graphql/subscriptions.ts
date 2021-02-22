@@ -2,9 +2,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTask = /* GraphQL */ `
-  subscription OnCreateTask($owner: String!) {
-    onCreateTask(owner: $owner) {
+export const onCreateMeeting = /* GraphQL */ `
+  subscription OnCreateMeeting($owner: String!) {
+    onCreateMeeting(owner: $owner) {
       id
       meetingId
       title
@@ -15,9 +15,9 @@ export const onCreateTask = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateTask = /* GraphQL */ `
-  subscription OnUpdateTask($owner: String!) {
-    onUpdateTask(owner: $owner) {
+export const onUpdateMeeting = /* GraphQL */ `
+  subscription OnUpdateMeeting($owner: String!) {
+    onUpdateMeeting(owner: $owner) {
       id
       meetingId
       title
@@ -28,9 +28,9 @@ export const onUpdateTask = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteTask = /* GraphQL */ `
-  subscription OnDeleteTask($owner: String!) {
-    onDeleteTask(owner: $owner) {
+export const onDeleteMeeting = /* GraphQL */ `
+  subscription OnDeleteMeeting($owner: String!) {
+    onDeleteMeeting(owner: $owner) {
       id
       meetingId
       title
