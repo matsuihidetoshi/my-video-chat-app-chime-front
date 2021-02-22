@@ -1,11 +1,15 @@
 <template>
   <div class="meeting">
-    <v-btn
-      color="success"
-      @click="newMeetingForm = true"
-    >
-      new meeting
-    </v-btn>
+    <v-row>
+      <v-col>
+        <v-btn
+          color="primary"
+          @click="newMeetingForm = true"
+        >
+          new meeting
+        </v-btn>
+      </v-col>
+    </v-row>
 
     <v-dialog
       v-model="newMeetingForm"
@@ -52,7 +56,7 @@
           </v-btn>
 
           <v-btn
-            color="success"
+            color="primary"
             @click="newMeetingForm = false, createMeeting()"
           >
             create
@@ -66,7 +70,8 @@
         v-for="(meeting, index) in meetings"
         :key="index"
         cols="12"
-        :md="index === 0 ? 12 : 6"
+        sm="6"
+        md="4"
       >
         <v-card
           class="
@@ -86,10 +91,11 @@
             v-text="meeting.description"
           />
 
-          <v-row>
+          <v-card-actions>
             <v-spacer />
 
             <v-btn
+              v-if="meeting.owner === owner"
               color="error"
               @click="deleteConfirmation = true, deleteIndex = index"
               class="mr-2"
@@ -129,15 +135,7 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-
-            <v-btn
-              color="primary"
-              :to="'/meetings/' + meeting.id"
-              class="mr-2"
-            >
-              edit
-            </v-btn>
-          </v-row>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
