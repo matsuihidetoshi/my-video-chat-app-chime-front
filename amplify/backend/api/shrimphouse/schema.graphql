@@ -1,0 +1,14 @@
+type Task
+  @model
+  @auth(
+    rules: [
+      { allow: private, queries: [get, list], mutations: null }
+      { allow: owner }
+    ]
+  ) {
+  id: ID!
+  meetingId: String!
+  title: String!
+  description: String
+  updatedAt: String
+}
