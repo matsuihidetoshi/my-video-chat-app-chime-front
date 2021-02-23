@@ -93,11 +93,6 @@
             v-text="meeting.description"
           />
 
-          <v-card-text>
-            {{ owner }}
-            {{ meeting.owner }}
-          </v-card-text>
-
           <v-divider />
 
           <v-card-actions>

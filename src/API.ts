@@ -210,10 +210,6 @@ export type ListMeetingsQuery = {
   } | null,
 };
 
-export type OnCreateMeetingSubscriptionVariables = {
-  owner?: string,
-};
-
 export type OnCreateMeetingSubscription = {
   onCreateMeeting?:  {
     __typename: "Meeting",
@@ -227,10 +223,6 @@ export type OnCreateMeetingSubscription = {
   } | null,
 };
 
-export type OnUpdateMeetingSubscriptionVariables = {
-  owner?: string,
-};
-
 export type OnUpdateMeetingSubscription = {
   onUpdateMeeting?:  {
     __typename: "Meeting",
@@ -242,10 +234,6 @@ export type OnUpdateMeetingSubscription = {
     createdAt: string,
     owner?: string | null,
   } | null,
-};
-
-export type OnDeleteMeetingSubscriptionVariables = {
-  owner?: string,
 };
 
 export type OnDeleteMeetingSubscription = {

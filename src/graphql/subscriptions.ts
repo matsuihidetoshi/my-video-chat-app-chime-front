@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateMeeting = /* GraphQL */ `
-  subscription OnCreateMeeting($owner: String!) {
-    onCreateMeeting(owner: $owner) {
+  subscription OnCreateMeeting {
+    onCreateMeeting {
       id
       meetingId
       title
@@ -16,8 +16,8 @@ export const onCreateMeeting = /* GraphQL */ `
   }
 `;
 export const onUpdateMeeting = /* GraphQL */ `
-  subscription OnUpdateMeeting($owner: String!) {
-    onUpdateMeeting(owner: $owner) {
+  subscription OnUpdateMeeting {
+    onUpdateMeeting {
       id
       meetingId
       title
@@ -29,8 +29,8 @@ export const onUpdateMeeting = /* GraphQL */ `
   }
 `;
 export const onDeleteMeeting = /* GraphQL */ `
-  subscription OnDeleteMeeting($owner: String!) {
-    onDeleteMeeting(owner: $owner) {
+  subscription OnDeleteMeeting {
+    onDeleteMeeting {
       id
       meetingId
       title
