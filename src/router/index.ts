@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import SignIn from '../views/SignIn.vue'
 import Meetings from '../views/Meetings.vue'
+import Meeting from '../views/Meeting.vue'
 import Home from '../views/Home.vue'
 import store from '../store/index'
 
@@ -41,6 +42,12 @@ const routes: Array<RouteConfig> = [
     path: '/meetings',
     name: 'meetings',
     component: Meetings,
+    meta: { requireAuth: true }
+  },
+  {
+    path: '/meetings/:id',
+    name: 'meeting',
+    component: Meeting,
     meta: { requireAuth: true }
   },
   {

@@ -99,6 +99,13 @@
             <v-spacer />
 
             <v-btn
+              color="secondary"
+              :to="'/meetings/' + meeting.id"
+            >
+              join
+            </v-btn>
+
+            <v-btn
               v-if="meeting.owner === owner"
               color="error"
               @click="deleteConfirmation = true, deleteIndex = index"
