@@ -1,16 +1,5 @@
 <template>
   <div class="meeting">
-    <v-row>
-      <v-col>
-        <v-btn
-          color="primary"
-          @click="newMeetingForm = true"
-        >
-          new meeting
-        </v-btn>
-      </v-col>
-    </v-row>
-
     <v-dialog
       v-model="newMeetingForm"
     >
@@ -22,29 +11,37 @@
             lighten-2
           "
         >
-          Create new meeting
+          Create a new meeting
         </v-card-title>
 
         <v-card-text>
-          <v-form>
+          <v-form
+            ref="form"
+            v-model="valid"
+          >
             <v-text-field
               v-model="title"
+              :rules="[rules.required, rules.under500]"
               label="Title"
+              required
             />
 
             <v-textarea
               v-model="description"
+              :rules="[rules.under500]"
               label="Description"
+              required
+            />
+
+            <v-text-field
+              v-model="meetingId"
+              label="Meeting ID"
+              required
             />
           </v-form>
-
-          <v-text-field
-            v-model="meetingId"
-            label="Meeting ID"
-          />
         </v-card-text>
 
-        <v-divider></v-divider>
+        <v-divider />
 
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -57,7 +54,7 @@
 
           <v-btn
             color="primary"
-            @click="newMeetingForm = false, createMeeting()"
+            @click="createMeeting()"
           >
             create
           </v-btn>
@@ -75,13 +72,18 @@
       >
         <v-card
           class="
-            pa-3
             breakline
           "
         >
-          <v-card-title
-            v-text="meeting.title"
-          />
+          <v-toolbar
+            color="primary"
+            flat
+          >
+            <v-card-title
+              class="white--text"
+              v-text="meeting.title"
+            />
+          </v-toolbar>
 
           <v-card-subtitle
             v-text="meeting.meetingId"
@@ -90,6 +92,13 @@
           <v-card-text
             v-text="meeting.description"
           />
+
+          <v-card-text>
+            {{ owner }}
+            {{ meeting.owner }}
+          </v-card-text>
+
+          <v-divider />
 
           <v-card-actions>
             <v-spacer />
@@ -115,7 +124,7 @@
                   Are you sure?
                 </v-card-text>
 
-                <v-divider></v-divider>
+                <v-divider />
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -140,6 +149,17 @@
       </v-col>
     </v-row>
 
+    <v-row>
+      <v-col>
+        <v-btn
+          color="primary"
+          @click="newMeetingForm = true"
+        >
+          new meeting
+        </v-btn>
+      </v-col>
+    </v-row>
+
     <v-overlay
       :value="loading"
     >
@@ -152,13 +172,20 @@
 
     <v-snackbar
       v-model="snackbar"
-      color="blue-grey"
+      color="accent"
       top
     >
-      {{ message }}
+      <span
+        class="
+          black--text
+          font-weight-bold
+        "
+      >
+        {{ message }}
+      </span>
       <template v-slot:action="{ attrs }">
         <v-btn
-          color="#FF9900"
+          color="secondary"
           class="
             font-weight-bold
           "
@@ -177,7 +204,7 @@ import { API, graphqlOperation} from "aws-amplify"
 import { createMeeting, updateMeeting, deleteMeeting } from "../graphql/mutations"
 import { listMeetings } from "../graphql/queries"
 import { getMeeting } from "../graphql/queries"
-import { onCreateMeeting } from "../graphql/subscriptions"
+import { onCreateMeeting, onDeleteMeeting } from "../graphql/subscriptions"
 import _ from 'lodash'
 
 @Component
@@ -185,6 +212,11 @@ export default class Meetings extends Vue {
   title = ""
   description = ""
   meetingId = ""
+  valid = false
+  rules = {
+    required: (v) => { return !!v || 'Required' },
+    under500: (v) => { return v.length < 500 || 'Under 500 characters required'}
+  }
   meeting = null
   meetings = []
   owner = ""
@@ -197,11 +229,16 @@ export default class Meetings extends Vue {
   message = null
 
   mounted () {
+    this.loading = true
     this.owner = this.$store.state.user.username
-    this.displayMeetings()
+    this.displayMeetings().finally(() => { this.loading = false })
+    this.subscribeMeetings()
   }
 
   async createMeeting () {
+    this.$refs.form.validate()
+    if (!this.valid) { return }
+    this.newMeetingForm = false
     this.loading = true
     const meeting = {
       title: this.title,
@@ -277,13 +314,25 @@ export default class Meetings extends Vue {
       listMeetings, { limit: this.limit }
     ))
     this.meetings = _.orderBy(meetings.data.listMeetings.items, 'createdAt', 'asc')
-    
+  }
+
+  async subscribeMeetings () {
     API.graphql(
       graphqlOperation(onCreateMeeting, { limit: this.limit, owner: this.owner })
     ).subscribe({
       next: (eventData) => {
         const meeting = eventData.value.data.onCreateMeeting
         const meetings = [...this.meetings, meeting]
+        this.meetings = _.orderBy(meetings, 'createdAt', 'asc')
+      }
+    })
+
+    API.graphql(
+      graphqlOperation(onDeleteMeeting, { limit: this.limit, owner: this.owner })
+    ).subscribe({
+      next: (eventData) => {
+        const deletedMeeting = eventData.value.data.onDeleteMeeting
+        const meetings = this.meetings.filter((meeting) => meeting.id !== deletedMeeting.id)
         this.meetings = _.orderBy(meetings, 'createdAt', 'asc')
       }
     })

@@ -18,7 +18,7 @@ const options: VuetifyPreset = {
     themes: {
       light: {
         primary: '#eb559f',
-        accent: colors.grey.darken3,
+        accent: colors.grey.lighten3,
         secondary: colors.amber.darken3,
         info: colors.teal.lighten1,
         warning: colors.amber.base,
@@ -27,7 +27,7 @@ const options: VuetifyPreset = {
       },
       dark: {
         primary: '#eb559f',
-        accent: colors.grey.darken3,
+        accent: colors.grey.lighten3,
         secondary: colors.amber.darken3,
         info: colors.teal.lighten1,
         warning: colors.amber.base,
