@@ -41,7 +41,7 @@
     </v-overlay>
   </v-row>
 </template>
-<script>
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { API, graphqlOperation} from "aws-amplify"
 import { getMeeting } from "../graphql/queries"
@@ -50,6 +50,7 @@ import { getMeeting } from "../graphql/queries"
 export default class Meetings extends Vue {
   meeting = null
   loading = false
+  $route: any
 
   mounted () {
     this.loading = true
@@ -57,7 +58,7 @@ export default class Meetings extends Vue {
   }
 
   async singleMeeting () {
-    const response = await API.graphql(graphqlOperation(
+    const response: any = await API.graphql(graphqlOperation(
       getMeeting, { id: this.$route.params.id }
     ))
     this.meeting = response.data.getMeeting

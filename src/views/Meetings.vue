@@ -200,7 +200,7 @@
     </v-snackbar>
   </div>
 </template>
-<script>
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { API, graphqlOperation} from "aws-amplify"
 import { createMeeting, updateMeeting, deleteMeeting } from "../graphql/mutations"
@@ -216,11 +216,11 @@ export default class Meetings extends Vue {
   meetingId = ""
   valid = false
   rules = {
-    required: (v) => { return !!v || 'Required' },
-    under500: (v) => { return v.length < 500 || 'Under 500 characters required'}
+    required: (v: string) => { return !!v || 'Required' },
+    under500: (v: string) => { return v.length < 500 || 'Under 500 characters required'}
   }
-  meeting = null
-  meetings = []
+  meeting: any = null
+  meetings: Array<any> = []
   owner = ""
   limit = 2 ** 31 - 1
   newMeetingForm = false
@@ -228,7 +228,8 @@ export default class Meetings extends Vue {
   deleteIndex = null
   loading = false
   snackbar = false
-  message = null
+  message = ""
+  $store: any
 
   mounted () {
     this.loading = true
@@ -238,7 +239,7 @@ export default class Meetings extends Vue {
   }
 
   async createMeeting () {
-    this.$refs.form.validate()
+    (this.$refs.form as Vue & { validate: () => boolean }).validate()
     if (!this.valid) { return }
     this.newMeetingForm = false
     this.loading = true
@@ -312,27 +313,29 @@ export default class Meetings extends Vue {
   }
 
   async displayMeetings () {
-    const meetings = await API.graphql(graphqlOperation(
+    const meetings: any = await API.graphql(graphqlOperation(
       listMeetings, { limit: this.limit }
     ))
     this.meetings = _.orderBy(meetings.data.listMeetings.items, 'createdAt', 'asc')
   }
 
   async subscribeMeetings () {
-    API.graphql(
+    const onCreateMeetingObject: any = (API.graphql(
       graphqlOperation(onCreateMeeting, { limit: this.limit, owner: this.owner })
-    ).subscribe({
-      next: (eventData) => {
+    ) as unknown as any)
+    onCreateMeetingObject.subscribe({
+      next: (eventData: any) => {
         const meeting = eventData.value.data.onCreateMeeting
         const meetings = [...this.meetings, meeting]
         this.meetings = _.orderBy(meetings, 'createdAt', 'asc')
       }
     })
 
-    API.graphql(
+    const onDeleteMeetingObject: any = (API.graphql(
       graphqlOperation(onDeleteMeeting, { limit: this.limit, owner: this.owner })
-    ).subscribe({
-      next: (eventData) => {
+    ) as unknown as any)
+    onDeleteMeetingObject.subscribe({
+      next: (eventData: any) => {
         const deletedMeeting = eventData.value.data.onDeleteMeeting
         const meetings = this.meetings.filter((meeting) => meeting.id !== deletedMeeting.id)
         this.meetings = _.orderBy(meetings, 'createdAt', 'asc')
@@ -340,7 +343,7 @@ export default class Meetings extends Vue {
     })
   }
 
-  async singleMeeting (selectedMeeting) {
+  async singleMeeting (selectedMeeting: any) {
     const meeting = await API.graphql(graphqlOperation(
       getMeeting, { id: selectedMeeting.id }
     ))
