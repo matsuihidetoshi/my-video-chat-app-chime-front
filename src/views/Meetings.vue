@@ -32,12 +32,6 @@
               label="Description"
               required
             />
-
-            <v-text-field
-              v-model="meetingId"
-              label="Meeting ID"
-              required
-            />
           </v-form>
         </v-card-text>
 
@@ -54,7 +48,7 @@
 
           <v-btn
             color="primary"
-            @click="createMeeting()"
+            @click="requestChimeMeeting()"
           >
             create
           </v-btn>
@@ -84,10 +78,6 @@
               v-text="meeting.title"
             />
           </v-toolbar>
-
-          <v-card-subtitle
-            v-text="meeting.meetingId"
-          />
 
           <v-card-text
             v-text="meeting.description"
@@ -208,6 +198,7 @@ import { listMeetings } from "../graphql/queries"
 import { getMeeting } from "../graphql/queries"
 import { onCreateMeeting, onDeleteMeeting } from "../graphql/subscriptions"
 import _ from 'lodash'
+import axios from 'axios'
 
 @Component
 export default class Meetings extends Vue {
@@ -262,7 +253,7 @@ export default class Meetings extends Vue {
     }
   }
 
-  async updateMeeting (index) {
+  async updateMeeting (index: number) {
     this.loading = true
     const meeting = {
       id: this.meetings[index].id,
@@ -288,7 +279,7 @@ export default class Meetings extends Vue {
     }
   }
 
-  async deleteMeeting (index) {
+  async deleteMeeting (index: number) {
     this.loading = true
     const meeting = {
       id: this.meetings[index].id
@@ -348,6 +339,30 @@ export default class Meetings extends Vue {
       getMeeting, { id: selectedMeeting.id }
     ))
     this.meeting = meeting
+  }
+
+  generateString() {
+    return (
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15)
+    )
+  }
+
+  async requestChimeMeeting () {
+    this.newMeetingForm = false
+    this.loading = true
+    await axios.get('https://ceh6sjj3l7.execute-api.ap-northeast-1.amazonaws.com/beta/operate?clientId=' + this.generateString(),
+    {
+      headers: { "Authorization": this.$store.state.user.signInUserSession.idToken.jwtToken },
+      data: {}
+    }).then((response: any) => (
+      this.meetingId = response.data.Info.Meeting.Meeting.MeetingId,
+      this.createMeeting()
+    )).catch((error: any) => (
+      this.meetingId = error
+    )).finally(() => {
+      this.loading = false
+    })
   }
 }
 </script>
