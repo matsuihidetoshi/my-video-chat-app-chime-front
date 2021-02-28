@@ -241,8 +241,6 @@ export default class Meetings extends Vue {
   }
 
   async createMeeting () {
-    (this.$refs.form as Vue & { validate: () => boolean }).validate()
-    if (!this.valid) { return }
     this.newMeetingForm = false
     this.loading = true
     const meeting = {
@@ -360,6 +358,8 @@ export default class Meetings extends Vue {
   }
 
   async requestChimeMeeting () {
+    (this.$refs.form as Vue & { validate: () => boolean }).validate()
+    if (!this.valid) { return }
     this.newMeetingForm = false
     this.loading = true
     await axios.get('https://ceh6sjj3l7.execute-api.ap-northeast-1.amazonaws.com/beta/operate?clientId=' + this.generateString(),
