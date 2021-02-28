@@ -87,6 +87,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { API, graphqlOperation} from "aws-amplify"
 import { getMeeting } from "../graphql/queries"
+import { updateMeeting } from "../graphql/mutations"
 import {
   ConsoleLogger,
   DefaultDeviceController,
@@ -109,6 +110,7 @@ export default class Meeting extends Vue {
   meetingSession: any
   meetingResponse = null
   meetingId = ''
+  hogehoge = 'hogehoge'
   attendeeResponse = null
   audioOutputElement: any
   $route: any
@@ -123,6 +125,10 @@ export default class Meeting extends Vue {
     }).finally(() => { this.loading = false })
   }
 
+  beforeDestroy () {
+    if (this.meetingSession) { this.meetingSession.audioVideo.stop() }
+  }
+
   async singleMeeting () {
     const response: any = await API.graphql(graphqlOperation(
       getMeeting, { id: this.$route.params.id }
@@ -131,11 +137,52 @@ export default class Meeting extends Vue {
     this.meetingId = response.data.getMeeting.meetingId
   }
 
+  async updateMeetingId () {
+    this.loading = true
+    const meeting = {
+      id: this.$route.params.id,
+      meetingId: this.meetingId
+    }
+    try {
+      await API.graphql(
+        graphqlOperation(
+          updateMeeting,
+          { input: meeting }
+        )
+      )
+      this.loading = false
+    } catch (error) {
+      this.message = error
+      this.snackbar = true
+      this.loading = false
+    }
+  }
+
   generateString() {
     return (
         Math.random().toString(36).substring(2, 15) +
         Math.random().toString(36).substring(2, 15)
     )
+  }
+
+  async requestChimeMeeting () {
+    this.loading = true
+    await axios.get('https://ceh6sjj3l7.execute-api.ap-northeast-1.amazonaws.com/beta/operate?clientId=' + this.generateString(),
+    {
+      headers: { "Authorization": this.$store.state.user.signInUserSession.idToken.jwtToken },
+      data: {}
+    }).then((response: any) => (
+      this.meetingId = response.data.Info.Meeting.Meeting.MeetingId,
+      this.updateMeetingId().then(() => {
+        this.attend().then(() => {
+          this.start()
+        })
+      })
+    )).catch((error: any) => (
+      this.meetingId = error
+    )).finally(() => {
+      this.loading = false
+    })
   }
 
   async attend () {
@@ -149,8 +196,7 @@ export default class Meeting extends Vue {
       this.meetingResponse = response.data.Info.Meeting
       this.attendeeResponse = response.data.Info.Attendee
     }).catch(() => {
-      this.message = 'Oops, this meeting seems to be terminated',
-      this.snackbar = true
+      this.requestChimeMeeting()
     }).finally(() => {
       this.loading = false
     })

@@ -57,6 +57,17 @@
     </v-dialog>
 
     <v-row>
+      <v-col>
+        <v-btn
+          color="primary"
+          @click="newMeetingForm = true"
+        >
+          new meeting
+        </v-btn>
+      </v-col>
+    </v-row>
+
+    <v-row>
       <v-col
         v-for="(meeting, index) in meetings"
         :key="index"
@@ -307,7 +318,7 @@ export default class Meetings extends Vue {
     const meetings: any = await API.graphql(graphqlOperation(
       listMeetings, { limit: this.limit }
     ))
-    this.meetings = _.orderBy(meetings.data.listMeetings.items, 'createdAt', 'asc')
+    this.meetings = _.orderBy(meetings.data.listMeetings.items, 'createdAt', 'desc')
   }
 
   async subscribeMeetings () {
@@ -318,7 +329,7 @@ export default class Meetings extends Vue {
       next: (eventData: any) => {
         const meeting = eventData.value.data.onCreateMeeting
         const meetings = [...this.meetings, meeting]
-        this.meetings = _.orderBy(meetings, 'createdAt', 'asc')
+        this.meetings = _.orderBy(meetings, 'createdAt', 'desc')
       }
     })
 
@@ -329,7 +340,7 @@ export default class Meetings extends Vue {
       next: (eventData: any) => {
         const deletedMeeting = eventData.value.data.onDeleteMeeting
         const meetings = this.meetings.filter((meeting) => meeting.id !== deletedMeeting.id)
-        this.meetings = _.orderBy(meetings, 'createdAt', 'asc')
+        this.meetings = _.orderBy(meetings, 'createdAt', 'desc')
       }
     })
   }

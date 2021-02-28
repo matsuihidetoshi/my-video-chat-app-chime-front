@@ -4,13 +4,24 @@ type Meeting
   )
   @auth(
     rules: [
-      { allow: private, queries: [get, list], mutations: null }
-      { allow: owner }
+      { allow: private }
     ]
   ) {
   id: ID!
   meetingId: String!
-  title: String!
-  description: String
+  title: String! @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Operators"] }
+      { allow: owner }
+    ]
+  )
+  description: String @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Operators"] }
+      { allow: owner }
+    ]
+  )
   updatedAt: String
 }
