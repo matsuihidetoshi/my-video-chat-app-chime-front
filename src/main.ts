@@ -5,8 +5,7 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import Amplify, * as AmplifyModules from 'aws-amplify'
-import { AmplifyPlugin } from 'aws-amplify-vue'
-import { components } from 'aws-amplify-vue'
+import { AmplifyPlugin, components } from 'aws-amplify-vue'
 
 Vue.config.productionTip = false
 
