@@ -1,19 +1,19 @@
 {
-  "production": {
+  "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-shrimphouse-production-140618-authRole",
-      "UnauthRoleArn": "arn:aws:iam::846058660752:role/amplify-shrimphouse-production-140618-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::846058660752:role/amplify-shrimphouse-production-140618-authRole",
+      "AuthRoleName": "amplify-myvideochatappchimef-dev-214818-authRole",
+      "UnauthRoleArn": "arn:aws:iam::846058660752:role/amplify-myvideochatappchimef-dev-214818-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::846058660752:role/amplify-myvideochatappchimef-dev-214818-authRole",
       "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-shrimphouse-production-140618-deployment",
-      "UnauthRoleName": "amplify-shrimphouse-production-140618-unauthRole",
-      "StackName": "amplify-shrimphouse-production-140618",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:846058660752:stack/amplify-shrimphouse-production-140618/f8438350-744d-11eb-b18e-0aff14bc0982",
-      "AmplifyAppId": "d3o5dfm1r0rdn2"
+      "DeploymentBucketName": "amplify-myvideochatappchimef-dev-214818-deployment",
+      "UnauthRoleName": "amplify-myvideochatappchimef-dev-214818-unauthRole",
+      "StackName": "amplify-myvideochatappchimef-dev-214818",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:846058660752:stack/amplify-myvideochatappchimef-dev-214818/0e8f9940-10cf-11ed-88db-06f8a4369e85",
+      "AmplifyAppId": "d1torsiaqlt4eu"
     },
     "categories": {
       "auth": {
-        "shrimphouse568e3d79": {}
+        "myvideochatappchimef9e06365e": {}
       }
     }
   }

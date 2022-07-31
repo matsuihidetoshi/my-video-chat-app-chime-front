@@ -1,4 +1,4 @@
-# shrimphouse
+# my-video-chat-app-front
 
 ## Project setup
 ```

@@ -21,7 +21,7 @@
         @click.stop="drawer = !drawer"
       >
         <v-img
-          alt="Shrimphouse Logo"
+          alt="MyVideoChatApp Logo"
           class="shrink mr-2"
           contain
           src="/img/icons/android-chrome-512x512.png"
@@ -48,7 +48,7 @@
       absolute
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }} &nbsp; Shrimphouse</span>
+      <span>&copy; {{ new Date().getFullYear() }} &nbsp; MyVideoChatApp</span>
     </v-footer>
   </v-app>
 </template>
@@ -66,7 +66,7 @@ import Description from './components/Description.vue'
 })
 
 export default class App extends Vue {
-  title = 'Shrimphouse'
+  title = 'MyVideoChatApp'
   drawer = false
 }
 </script>

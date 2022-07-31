@@ -1,7 +1,5 @@
 type Meeting
-  @model(
-    subscriptions: { level: public }
-  )
+  @model
   @auth(
     rules: [
       { allow: private }
