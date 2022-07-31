@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "myvideochatappchimef",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/matsuihidetoshi/my-video-chat-app/my-video-chat-app-chime-front/amplify/backend/api/myvideochatappchimef/schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authmyvideochatappchimef9e06365e"
+    }
+  }
+}
