@@ -167,7 +167,7 @@ export default class Meeting extends Vue {
 
   async requestChimeMeeting () {
     this.loading = true
-    await axios.get('https://ceh6sjj3l7.execute-api.ap-northeast-1.amazonaws.com/beta/operate?clientId=' + this.generateString(),
+    await axios.get(`${process.env.VUE_APP_MYVIDEOCHATAPP_CHIME_HANDLER_ENDPOINT}?clientId=` + this.generateString(),
     {
       headers: { "Authorization": this.$store.state.user.signInUserSession.idToken.jwtToken },
       data: {}
@@ -187,7 +187,7 @@ export default class Meeting extends Vue {
 
   async attend () {
     this.loading = true
-    await axios.get('https://ceh6sjj3l7.execute-api.ap-northeast-1.amazonaws.com/beta/operate?clientId=' +
+    await axios.get(`${process.env.VUE_APP_MYVIDEOCHATAPP_CHIME_HANDLER_ENDPOINT}?clientId=` +
       this.generateString() + '&meetingId=' + this.meetingId,
     {
       headers: { "Authorization": this.$store.state.user.signInUserSession.idToken.jwtToken },

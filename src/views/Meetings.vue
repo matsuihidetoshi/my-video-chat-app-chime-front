@@ -362,7 +362,7 @@ export default class Meetings extends Vue {
     if (!this.valid) { return }
     this.newMeetingForm = false
     this.loading = true
-    await axios.get('https://ceh6sjj3l7.execute-api.ap-northeast-1.amazonaws.com/beta/operate?clientId=' + this.generateString(),
+    await axios.get(`${process.env.VUE_APP_MYVIDEOCHATAPP_CHIME_HANDLER_ENDPOINT}?clientId=` + this.generateString(),
     {
       headers: { "Authorization": this.$store.state.user.signInUserSession.idToken.jwtToken },
       data: {}
